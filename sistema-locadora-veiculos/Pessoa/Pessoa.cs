@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace sistema_locadora_veiculos
+namespace sistema_locadora_veiculos.Pessoa
 {
     public abstract class Pessoa
     {
