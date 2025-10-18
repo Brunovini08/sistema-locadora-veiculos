@@ -12,7 +12,7 @@ namespace sistema_locadora_veiculos
         private string Modelo { get; set; }
         private int Ano { get; set; }
         private string Placa { get; set; }
-        private Veiculo(string marca, string modelo, int ano, string placa)
+        public Veiculo(string marca, string modelo, int ano, string placa)
         {
             Marca = marca;
             Modelo = modelo;
