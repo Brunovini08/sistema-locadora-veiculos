@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace sistema_locadora_veiculos.Pessoa.Pessoa
 {
-    public class PessoaJuridica : Pessoa
+    public class PessoaJuridica : PessoaBase
     {
         public string Cnpj { get; set; }
         public PessoaJuridica(string nome, string telefone, Endereco endereco, string cnpj) : base(nome, telefone, endereco)

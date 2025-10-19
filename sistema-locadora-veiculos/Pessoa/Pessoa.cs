@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace sistema_locadora_veiculos.Pessoa.Pessoa
 {
-    public abstract class Pessoa
+    public abstract class PessoaBase
     {
-        private string Nome { get; set; }
-        private string Telefone { get; set; }
-        private Endereco EnderecoPessoa { get; set; }
-        public Pessoa(string nome, string telefone, Endereco endereco)
+        public string Nome { get; private set; }
+        public string Telefone { get; private set; }
+        public Endereco EnderecoPessoa { get; private set; }
+        public PessoaBase(string nome, string telefone, Endereco endereco)
         {
             Nome = nome;
             Telefone = telefone;
@@ -22,5 +22,6 @@ namespace sistema_locadora_veiculos.Pessoa.Pessoa
         {
             return $"Nome: {Nome}, Telefone: {Telefone}";
         }
+
     }
 }

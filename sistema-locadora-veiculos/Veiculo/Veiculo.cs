@@ -6,31 +6,26 @@ using System.Threading.Tasks;
 
 namespace sistema_locadora_veiculos.Veiculo
 {
-    public abstract class Veiculo
+    public abstract class VeiculoBase
     {
-        private string Marca { get; set; }
-        private string Modelo { get; set; }
-        private int Ano { get; set; }
-        private string Placa { get; set; }
-
-        private List<Veiculo> Veiculos { get; set; }
-        public Veiculo(string marca, string modelo, int ano, string placa)
+        public string Marca { get; private set; }
+        public string Modelo { get; private set; }
+        public int Ano { get; private set; }
+        public string Placa { get; private set; }
+        public string Categoria { get; private set; }
+        public string Combustivel { get; private set; }
+        public VeiculoBase(string marca, string modelo, int ano, string placa, string categoria, string combustivel)
         {
-            Marca = marca;
-            Modelo = modelo;
-            Ano = ano;
-            Placa = placa;
-            this.Veiculos = new List<Veiculo>();
+            this.Marca = marca;
+            this.Modelo = modelo;
+            this.Ano = ano;
+            this.Placa = placa;
+            this.Categoria = categoria;
+            this.Combustivel = combustivel;
         }
         public override string ToString()
         {
-            return $"Marca: {Marca}, Modelo: {Modelo}, Ano: {Ano}, Placa: {Placa}";
-        }
-
-        public Veiculo CadastrarVeiculo(Veiculo veiculo)
-        {
-            this.Veiculos.Add(veiculo);
-            return this;
+            return $"Marca: {this.Marca}, Modelo: {this.Modelo}, Ano: {this.Ano}, Placa: {this.Placa}, Categoria: {this.Categoria}";
         }
     }
 }
