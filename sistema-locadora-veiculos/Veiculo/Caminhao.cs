@@ -13,5 +13,10 @@ namespace sistema_locadora_veiculos.Veiculo
         {
             CapacidadeCarga = capacidadeCarga;
         }
+
+        public override string ToString()
+        {
+            return base.ToString() + $"Capacidade:   {CapacidadeCarga} kg\n";
+        }
     }
 }

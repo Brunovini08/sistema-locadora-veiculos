@@ -8,15 +8,15 @@ namespace sistema_locadora_veiculos.Pessoa.Pessoa
 {
     public class PessoaJuridica : PessoaBase
     {
-        public string Cnpj { get; set; }
-        public PessoaJuridica(string nome, string telefone, Endereco endereco, string cnpj) : base(nome, telefone, endereco)
+        public string Cnpj { get; private set; }
+        public PessoaJuridica(string nome, string telefone, Endereco endereco, string cnpj) : base(nome, telefone, endereco, cnpj)
         {
             Cnpj = cnpj;
         }
 
         public override string ToString()
         {
-            return base.ToString() + $" CNPJ: {this.Cnpj}";
+            return base.ToString() + $"CNPJ:        {this.Cnpj}";
         }
     }
 }

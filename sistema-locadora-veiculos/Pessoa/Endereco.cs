@@ -9,12 +9,12 @@ namespace sistema_locadora_veiculos.Pessoa.Pessoa
     public class Endereco
     {
         private string Rua { get; set; }
-        private string Numero { get; set; }
+        private int Numero { get; set; }
         private string Cidade { get; set; }
         private string Estado { get; set; }
         private string CEP { get; set; }
         private string Complemento { get; set; }
-        public Endereco(string rua, string numero, string cidade, string estado, string cep, string complemento)
+        public Endereco(string rua, int numero, string cidade, string estado, string cep, string complemento)
         {
             Rua = rua;
             Numero = numero;

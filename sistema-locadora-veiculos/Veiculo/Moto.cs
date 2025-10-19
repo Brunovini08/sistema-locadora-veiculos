@@ -13,5 +13,10 @@ namespace sistema_locadora_veiculos.Veiculo
         {
             this.Cilindrada = cilindrada;
         }
+
+        public override string ToString()
+        {
+            return base.ToString() + $"Cilindrada:   {Cilindrada}\n";
+        }
     }
 }

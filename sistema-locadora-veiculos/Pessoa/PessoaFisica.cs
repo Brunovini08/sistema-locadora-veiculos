@@ -9,15 +9,15 @@ namespace sistema_locadora_veiculos.Pessoa.Pessoa
 {
     public class PessoaFisica : PessoaBase
     {
-        private string Cpf { get; set; }
-        public PessoaFisica(string nome, string cpf, string telefone, Endereco endereco) : base(nome, telefone, endereco)
+        public string Cpf { get; private set; }
+        public PessoaFisica(string nome, string cpf, string telefone, Endereco endereco) : base(nome, telefone, endereco, cpf)
         {
             Cpf = cpf;
         }
 
         public override string ToString()
         {
-            return base.ToString() + $"CPF: {this.Cpf}";
+            return base.ToString() + $"CPF:         {this.Cpf}";
         }
     }
 }

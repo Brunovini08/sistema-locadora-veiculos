@@ -13,5 +13,10 @@ namespace sistema_locadora_veiculos.Veiculo
         {
             this.Cambio = cambio;
         }
+
+        public override string ToString()
+        {
+            return base.ToString() + $"Câmbio:       {Cambio}\n";
+        }
     }
 }
