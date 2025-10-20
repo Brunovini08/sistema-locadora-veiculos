@@ -187,6 +187,7 @@ namespace sistema_locadora_veiculos.Locacoes
         public LocacaoBase FinalizarLocacao(DateOnly dataFim, int id)
         {
             LocacaoBase locacao = this.Locacoes.Find(locacao => locacao.Id == id);
+            this.Locacoes.Remove(locacao);
             return locacao.FinalizarLocacao(dataFim, id);
         }
 
