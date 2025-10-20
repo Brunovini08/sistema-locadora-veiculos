@@ -141,7 +141,6 @@ LocacaoBase FinalizarLocacao()
     }
     Console.Write("Digite o ID da locação que deseja finalizar: ");
     int id = int.Parse(Console.ReadLine());
-    Console.ReadKey();
     Console.Clear();
     Console.Write("Digite a data de finalização do aluguel (MM/DD/AAAA): ");
     DateOnly dataFim = DateOnly.ParseExact(Console.ReadLine(), "dd/MM/yyyy");
