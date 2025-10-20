@@ -16,7 +16,7 @@ namespace sistema_locadora_veiculos.Locacao
         public DateOnly DataInicioLocacao { get; private set; }
         public DateOnly? DataFimLocacao { get; private set; }
         public int Id { get; private set; }
-        public double valor { get; private set; }
+        public double? Valor { get; private set; }
 
         public LocacaoBase(PessoaBase pessoa, VeiculoBase veiculo)
         {
@@ -27,12 +27,19 @@ namespace sistema_locadora_veiculos.Locacao
             this.Veiculo.Disponivel = false;
         }
 
+        public int CalcularTempoDeAluguel(DateOnly dataInicial, DateOnly dataFim)
+        {
+            int data = dataFim.DayOfYear - dataInicial.DayOfYear;
+            return data;
+        }
 
         public LocacaoBase FinalizarLocacao(DateOnly dataFimLocal, int id)
         {
             if (this.Id == id)
             {
                 this.DataFimLocacao = dataFimLocal;
+                int diasAlugado = this.CalcularTempoDeAluguel(this.DataInicioLocacao, dataFimLocal);
+                this.Valor = diasAlugado * this.Veiculo.ValorAluguel;
                 return this;
             }
             else
@@ -45,9 +52,12 @@ namespace sistema_locadora_veiculos.Locacao
         {
             var sb = new StringBuilder();
 
-            sb.AppendLine("──────────────────────────────");
-            sb.AppendLine($"Cliente:          {this.Pessoa.ToString()}");
+            sb.AppendLine("─────────────────────────────────────────");
+            sb.AppendLine($"ID da Locação:  {this.Id}");
+            sb.AppendLine($"Cliente:        {this.Pessoa.ToString()}");
             sb.AppendLine($"Veículo:        {this.Veiculo.ToString()}");
+            sb.AppendLine($"Data:           {this.DataInicioLocacao}");
+            sb.AppendLine($"{(this.Valor != 0 ? ($"Valor a pagar: {this.Valor}") : "")}");
             return sb.ToString();
         }
     }

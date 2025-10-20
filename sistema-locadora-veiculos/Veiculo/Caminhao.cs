@@ -9,7 +9,7 @@ namespace sistema_locadora_veiculos.Veiculo
     public class Caminhao : VeiculoBase
     {
         private double CapacidadeCarga { get; set; }
-        public Caminhao(string marca, string modelo, int ano, string placa, double capacidadeCarga, string categoria, string combustivel) : base(marca, modelo, ano, placa, categoria, combustivel)
+        public Caminhao(string marca, string modelo, int ano, string placa, double capacidadeCarga, string categoria, string combustivel, double valorAluguel) : base(marca, modelo, ano, placa, categoria, combustivel, valorAluguel)
         {
             CapacidadeCarga = capacidadeCarga;
         }

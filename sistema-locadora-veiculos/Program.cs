@@ -20,6 +20,10 @@ void Menu()
                 RealizarLocacao();
                 break;
             case 2:
+                Console.Clear();
+                var locacaoFinalizada = FinalizarLocacao();
+                Console.ReadKey();
+                Console.WriteLine(locacaoFinalizada.ToString());
                 break;
             case 3:
                 Console.Clear();
@@ -77,6 +81,17 @@ void Menu()
                 }
                 Console.ReadKey();
                 break;
+            case 8:
+                Console.Clear();
+                var locacoes = locadora.BuscarLocacoes();
+                Console.WriteLine("LOCAÇÕES ENCONTRADA: ");
+                foreach(var locacao in locacoes)
+                {
+                    Console.WriteLine(locacao);
+                }
+                Console.ReadKey();
+                break;
+
         }
 
         ExibirMenuInicial();
@@ -90,6 +105,7 @@ void RealizarLocacao()
 {
     Console.Clear();
     Console.WriteLine("REALIZAR LOCAÇÃO DE UM VEÍCULO");
+
     var clientes = locadora.BuscarClientes();
     Console.WriteLine("CLIENTES ENCONTRADOS: ");
     foreach (var cliente in clientes)
@@ -101,6 +117,7 @@ void RealizarLocacao()
     int idCliente = int.Parse(Console.ReadLine());
     var clienteEncontrado = locadora.BuscarCliente("", idCliente);
     Console.Clear();
+
     var veiculos = BuscarVeiculos();
     if (veiculos == null)
     {
@@ -120,13 +137,14 @@ void RealizarLocacao()
         Console.WriteLine(veiculo);
     }
     Console.WriteLine();
-    Console.WriteLine("Selecione o Veículo desejado: ");
+    Console.WriteLine("Selecione o Veículo pelo ID: ");
     int idVeiculo = int.Parse(Console.ReadLine());
 
     var veiculoEncontrado = locadora.BuscarVeiculoId(idVeiculo);
     Console.Clear();
 
     LocacaoBase locacao = new LocacaoBase(clienteEncontrado, veiculoEncontrado);
+    locadora.RealizarLocacao(locacao);
     Console.ForegroundColor = ConsoleColor.Green;
     Console.WriteLine("Locação realizado com sucesso!");
     Console.ResetColor();
@@ -134,7 +152,32 @@ void RealizarLocacao()
     Console.WriteLine(locacao.ToString());
     Console.ReadKey();
 }
- 
+
+LocacaoBase FinalizarLocacao()
+{
+    Console.Clear();
+    Console.WriteLine("FINALIZAR LOCAÇÃO");
+    Console.WriteLine();
+    var locacoes = locadora.BuscarLocacoes();
+    foreach(var locacao in locacoes)
+    {
+        Console.WriteLine(locacao.ToString());
+    }
+    Console.Write("Digite o ID da locação que deseja finalizar: ");
+    int id = int.Parse(Console.ReadLine());
+    Console.ReadKey();
+    Console.Clear();
+    Console.Write("Digite a data de finalização do aluguel (MM/DD/AAAA): ");
+    DateOnly dataFim = DateOnly.ParseExact(Console.ReadLine(), "dd/MM/yyyy");
+    var locacaoFinalizar = locadora.FinalizarLocacao(dataFim, id);
+    Console.ForegroundColor = ConsoleColor.Green;
+    Console.WriteLine("Locação Finalizada");
+    Console.ResetColor();
+    Console.WriteLine();
+    Console.Write($"O Cliente: {locacaoFinalizar.Pessoa.Nome}, utilizou o veículo: {locacaoFinalizar.Veiculo.Modelo}, terá que efetuar o pagamento de: R${locacaoFinalizar.Valor}, referente ao aluguel do veículo");
+    Console.ReadKey();
+    return locacaoFinalizar;
+}
 //Cadastrar Veiculo
 void CadastrarVeiculo()
 {
@@ -196,7 +239,10 @@ VeiculoBase CadastrarCarro()
     Console.WriteLine();
     Console.Write("Digite o tipo de combustível do carro: ");
     string opcaoCambio = Console.ReadLine().ToUpper();
-    VeiculoBase carro = new Carro(marca, modelo, ano, placa, opcaoCategoria, opcaoCombustivel, opcaoCambio);
+    Console.Clear();
+    Console.Write($"Digite o valor do aluguel do {modelo}: ");
+    double valor = int.Parse(Console.ReadLine());
+    VeiculoBase carro = new Carro(marca, modelo, ano, placa, opcaoCategoria, opcaoCombustivel, opcaoCambio, valor);
     Console.Clear();
     return carro;
 }
@@ -235,7 +281,9 @@ VeiculoBase CadastrarMoto()
     Console.Write("Digite o tipo de combustível da moto: ");
     string opcaoCombustivel = Console.ReadLine().ToUpper();
     Console.Clear();
-    VeiculoBase moto = new Moto(marca, modelo, ano, placa, opcaoCilindradas, opcaoCombustivel, opcaoCategoria);
+    Console.Write($"Digite o valor do aluguel do {modelo}: ");
+    double valor = int.Parse(Console.ReadLine());
+    VeiculoBase moto = new Moto(marca, modelo, ano, placa, opcaoCilindradas, opcaoCombustivel, opcaoCategoria, valor);
     return moto;
 }
 VeiculoBase CadastrarCaminhao()
@@ -272,7 +320,9 @@ VeiculoBase CadastrarCaminhao()
     Console.Write("Digite o tipo de combustível do caminhão: ");
     string opcaoCombustivel = Console.ReadLine().ToUpper();
     Console.Clear();
-    VeiculoBase caminhao = new Caminhao(marca, modelo, ano, placa, capacidade, opcaoCombustivel, opcaoCategoria);
+    Console.Write($"Digite o valor do aluguel do {modelo}: ");
+    double valor = int.Parse(Console.ReadLine());
+    VeiculoBase caminhao = new Caminhao(marca, modelo, ano, placa, capacidade, opcaoCombustivel, opcaoCategoria, valor);
     Console.Clear();
     return caminhao;
 }
@@ -312,13 +362,6 @@ PessoaBase CadastrarPessoaFisica()
 
     Console.Write("Digite seu cpf: ");
     string cpf = Console.ReadLine();
-    if (cpf.Length != 11)
-    {
-        Console.ForegroundColor = ConsoleColor.Red;
-        Console.WriteLine("CPF inválido, o CPF deve conter 11 dígitos");
-        Console.Write("Digite seu cpf: ");
-        cpf = Console.ReadLine();
-    }
 
     Console.Clear();
     Console.Write("Digite seu número de telefone: ");
@@ -377,13 +420,6 @@ PessoaBase CadastrarPessoaJuridica()
 
     Console.Write("Digite seu cnpj: ");
     string cnpj = Console.ReadLine();
-    if (cnpj.Length != 14)
-    {
-        Console.ForegroundColor = ConsoleColor.Red;
-        Console.WriteLine("CNPJ inválido, o CNPJ deve conter 14 dígitos");
-        Console.Write("Digite seu cpf: ");
-        cnpj = Console.ReadLine();
-    }
 
     Console.Clear();
     Console.Write("Digite seu número de telefone: ");
@@ -459,7 +495,7 @@ PessoaBase BuscarCliente()
 
 PessoaBase BuscarPessoaFisica()
 {
-    Console.Write("Digite seu CPF sem pontos: ");
+    Console.Write("Digite seu CPF: ");
     string cpf = Console.ReadLine();
 
     return locadora.BuscarCliente(cpf, 0);
@@ -467,7 +503,7 @@ PessoaBase BuscarPessoaFisica()
 
 PessoaBase BuscarPessoaJuridica()
 {
-    Console.Write("Digite seu CNPJ com pontos: ");
+    Console.Write("Digite seu CNPJ: ");
     string cnpj = Console.ReadLine();
 
     return locadora.BuscarCliente(cnpj, 0);

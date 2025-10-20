@@ -82,7 +82,8 @@ namespace sistema_locadora_veiculos.Locacoes
                 placa: "ABC1D23",
                 categoria: "SEDAN",
                 combustivel: "GASOLINA",
-                cambio: "Automático"
+                cambio: "Automático",
+                valorAluguel: 150
             ),
             new Carro(
                 marca: "Fiat",
@@ -91,7 +92,8 @@ namespace sistema_locadora_veiculos.Locacoes
                 placa: "XYZ9Z99",
                 categoria: "SUV",
                 combustivel: "FLEX",
-                cambio: "Manual"
+                cambio: "Manual",
+                valorAluguel: 90
             ),
             new Carro(
                 marca: "BMW",
@@ -100,7 +102,8 @@ namespace sistema_locadora_veiculos.Locacoes
                 placa: "BBB3B33",
                 categoria: "ESPORTIVO",
                 combustivel: "GASOLINA",
-                cambio: "Automático"
+                cambio: "Automático",
+                valorAluguel: 200
             ),
 
             new Moto(
@@ -110,7 +113,8 @@ namespace sistema_locadora_veiculos.Locacoes
                 placa: "HND1A23",
                 cilindrada: "300cc",
                 combustivel: "GASOLINA",
-                categoria: "NAKED"
+                categoria: "NAKED",
+                valorAluguel: 50
             ),
             new Moto(
                 marca: "Yamaha",
@@ -119,7 +123,8 @@ namespace sistema_locadora_veiculos.Locacoes
                 placa: "YMH2B45",
                 cilindrada: "700cc",
                 combustivel: "GASOLINA",
-                categoria: "ESPORTIVA"
+                categoria: "ESPORTIVA",
+                valorAluguel: 80
             ),
             new Moto(
                 marca: "BMW",
@@ -128,7 +133,8 @@ namespace sistema_locadora_veiculos.Locacoes
                 placa: "BMW1C23",
                 cilindrada: "1250cc",
                 combustivel: "GASOLINA",
-                categoria: "BIG TRAIL"
+                categoria: "BIG TRAIL",
+                valorAluguel: 120
             ),
 
             new Caminhao(
@@ -138,7 +144,8 @@ namespace sistema_locadora_veiculos.Locacoes
                 placa: "MBX1A10",
                 capacidadeCarga: 6000.0,
                 categoria: "VUC",
-                combustivel: "DIESEL"
+                combustivel: "DIESEL",
+                valorAluguel: 400
             ),
             new Caminhao(
                 marca: "Volvo",
@@ -147,7 +154,8 @@ namespace sistema_locadora_veiculos.Locacoes
                 placa: "VOL2B22",
                 capacidadeCarga: 30000.0,
                 categoria: "CAVALO MECÂNICO",
-                combustivel: "DIESEL"
+                combustivel: "DIESEL",
+                valorAluguel: 700
             ),
             new Caminhao(
                 marca: "Scania",
@@ -156,7 +164,8 @@ namespace sistema_locadora_veiculos.Locacoes
                 placa: "SCN9C99",
                 capacidadeCarga: 28000.0,
                 categoria: "TRUCK",
-                combustivel: "DIESEL"
+                combustivel: "DIESEL",
+                valorAluguel: 600
             )
         };
         }
@@ -175,7 +184,11 @@ namespace sistema_locadora_veiculos.Locacoes
         {
             this.Locacoes.Add(locacao);
         }
-
+        public LocacaoBase FinalizarLocacao(DateOnly dataFim, int id)
+        {
+            LocacaoBase locacao = this.Locacoes.Find(locacao => locacao.Id == id);
+            return locacao.FinalizarLocacao(dataFim, id);
+        }
 
         public List<PessoaBase> BuscarClientes()
         {
@@ -210,6 +223,11 @@ namespace sistema_locadora_veiculos.Locacoes
         public List<VeiculoBase> BuscarVeiculos()
         {
             return this.Veiculos.ToList();
+        }
+
+        public List<LocacaoBase> BuscarLocacoes()
+        {
+            return this.Locacoes.ToList();
         }
     }
 }

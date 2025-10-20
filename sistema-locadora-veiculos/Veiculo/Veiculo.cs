@@ -17,7 +17,8 @@ namespace sistema_locadora_veiculos.Veiculo
         public string Categoria { get; private set; }
         public string Combustivel { get; private set; }
         public bool Disponivel { get; set; }
-        public VeiculoBase(string marca, string modelo, int ano, string placa, string categoria, string combustivel)
+        public double ValorAluguel { get; private set; }
+        public VeiculoBase(string marca, string modelo, int ano, string placa, string categoria, string combustivel, double valorAluguel)
         {
             this.Id = contador++;
             this.Marca = marca;
@@ -27,20 +28,22 @@ namespace sistema_locadora_veiculos.Veiculo
             this.Categoria = categoria;
             this.Combustivel = combustivel;
             this.Disponivel = true;
+            this.ValorAluguel = valorAluguel;
         }
         public override string ToString()
         {
             var sb = new StringBuilder();
 
             sb.AppendLine("──────────────────────────────");
-            sb.AppendLine($"ID:           {Id}");
-            sb.AppendLine($"Marca:        {Marca}");
-            sb.AppendLine($"Modelo:       {Modelo}");
-            sb.AppendLine($"Ano:          {Ano}");
-            sb.AppendLine($"Placa:        {Placa}");
-            sb.AppendLine($"Categoria:    {Categoria}");
-            sb.AppendLine($"Combustível:  {Combustivel}");
-            sb.AppendLine($"Disponível:  {Disponivel}");
+            sb.AppendLine($"ID:                   {Id}");
+            sb.AppendLine($"Marca:                {Marca}");
+            sb.AppendLine($"Modelo:               {Modelo}");
+            sb.AppendLine($"Ano:                  {Ano}");
+            sb.AppendLine($"Placa:                {Placa}");
+            sb.AppendLine($"Categoria:            {Categoria}");
+            sb.AppendLine($"Combustível:          {Combustivel}");
+            sb.AppendLine($"Disponível:           {(Disponivel ? "Sim" : "Não")}");
+            sb.AppendLine($"Valor Aluguel diário: {ValorAluguel}");
 
             return sb.ToString();
         }

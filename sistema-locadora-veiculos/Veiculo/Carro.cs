@@ -9,7 +9,7 @@ namespace sistema_locadora_veiculos.Veiculo
     public class Carro : VeiculoBase
     {
         public string Cambio { get; private set; }
-        public Carro(string marca, string modelo, int ano, string placa, string categoria, string combustivel, string cambio) : base(marca, modelo, ano, placa, categoria, combustivel)
+        public Carro(string marca, string modelo, int ano, string placa, string categoria, string combustivel, string cambio, double valorAluguel) : base(marca, modelo, ano, placa, categoria, combustivel, valorAluguel)
         {
             this.Cambio = cambio;
         }

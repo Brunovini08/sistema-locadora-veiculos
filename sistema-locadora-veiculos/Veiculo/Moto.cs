@@ -9,7 +9,7 @@ namespace sistema_locadora_veiculos.Veiculo
     public class Moto : VeiculoBase
     {
         public string Cilindrada {  get; private set; }
-        public Moto(string marca, string modelo, int ano, string placa, string cilindrada, string combustivel, string categoria) : base(marca, modelo, ano, placa, categoria, combustivel)
+        public Moto(string marca, string modelo, int ano, string placa, string cilindrada, string combustivel, string categoria, double valorAluguel) : base(marca, modelo, ano, placa, categoria, combustivel, valorAluguel)
         {
             this.Cilindrada = cilindrada;
         }
