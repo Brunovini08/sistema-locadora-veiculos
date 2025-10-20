@@ -40,6 +40,7 @@ namespace sistema_locadora_veiculos.Locacao
                 this.DataFimLocacao = dataFimLocal;
                 int diasAlugado = this.CalcularTempoDeAluguel(this.DataInicioLocacao, dataFimLocal);
                 this.Valor = diasAlugado * this.Veiculo.ValorAluguel;
+                this.Veiculo.Disponivel = true;
                 return this;
             }
             else

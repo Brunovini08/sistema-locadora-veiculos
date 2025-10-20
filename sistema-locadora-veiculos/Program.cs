@@ -20,76 +20,25 @@ void Menu()
                 RealizarLocacao();
                 break;
             case 2:
-                Console.Clear();
-                var locacaoFinalizada = FinalizarLocacao();
-                Console.ReadKey();
-                Console.WriteLine(locacaoFinalizada.ToString());
+                MenuFinalizarLocacao();
                 break;
             case 3:
-                Console.Clear();
                 CadastrarVeiculo();
-                Console.ReadKey();
                 break;
             case 4:
-                Console.Clear();
-                var veiculoEncontrado = BuscarVeiculos();
-                if (veiculoEncontrado == null)
-                {
-                    Console.WriteLine("Nenhum Veículo encontrado");
-                    Console.ReadKey();
-                    break;
-                }
-                if (veiculoEncontrado.Count == 1)
-                {
-                    Console.WriteLine($"{veiculoEncontrado.Count} - VEÍCULO ENCONTRADO: ");
-                }
-                else
-                {
-                    Console.WriteLine($"{veiculoEncontrado.Count} - VEÍCULOS ENCONTRADOS: ");
-                }
-                foreach (var veiculo in veiculoEncontrado)
-                {
-                    Console.WriteLine(veiculo);
-                }
-                Console.ReadKey();
+                MenuBuscarVeiculo();
                 break;
             case 5:
-                Console.Clear();
                 CadastrarCliente();
                 break;
             case 6:
-                Console.Clear();
-                var clienteEncontrado = BuscarCliente();
-                if (clienteEncontrado == null)
-                {
-                    Console.WriteLine("Nenhum Cliente encontrado com esse documento");
-                    Console.ReadKey();
-                    break;
-                }
-                Console.WriteLine("CLIENTE ENCONTRADO: ");
-                Console.WriteLine();
-                Console.WriteLine(clienteEncontrado.ToString());
-                Console.ReadKey();
+                MenuBuscarClientePorDocumento();
                 break;
             case 7:
-                Console.Clear();
-                var clientes = locadora.BuscarClientes();
-                Console.WriteLine("CLIENTES ENCONTRADOS: ");
-                foreach (var cliente in clientes)
-                {
-                    Console.WriteLine(cliente);
-                }
-                Console.ReadKey();
+                MenuBuscarTodosClientes();
                 break;
             case 8:
-                Console.Clear();
-                var locacoes = locadora.BuscarLocacoes();
-                Console.WriteLine("LOCAÇÕES ENCONTRADA: ");
-                foreach(var locacao in locacoes)
-                {
-                    Console.WriteLine(locacao);
-                }
-                Console.ReadKey();
+                MenuBuscarLocacoes();
                 break;
 
         }
@@ -101,6 +50,24 @@ void Menu()
 }
 
 
+//Funções de Locação
+void MenuBuscarLocacoes()
+{
+    Console.Clear();
+    var locacoes = locadora.BuscarLocacoes();
+    if(locacoes == null)
+    {
+        Console.WriteLine("Nenhuma locação encontrada!");
+        Console.ReadKey();
+        return;
+    }
+    Console.WriteLine("LOCAÇÕES ENCONTRADA: ");
+    foreach (var locacao in locacoes)
+    {
+        Console.WriteLine(locacao);
+    }
+    Console.ReadKey();
+}
 void RealizarLocacao()
 {
     Console.Clear();
@@ -152,14 +119,20 @@ void RealizarLocacao()
     Console.WriteLine(locacao.ToString());
     Console.ReadKey();
 }
-
+void MenuFinalizarLocacao()
+{
+    Console.Clear();
+    var locacaoFinalizada = FinalizarLocacao();
+    Console.ReadKey();
+    Console.WriteLine(locacaoFinalizada.ToString());
+}
 LocacaoBase FinalizarLocacao()
 {
     Console.Clear();
     Console.WriteLine("FINALIZAR LOCAÇÃO");
     Console.WriteLine();
     var locacoes = locadora.BuscarLocacoes();
-    foreach(var locacao in locacoes)
+    foreach (var locacao in locacoes)
     {
         Console.WriteLine(locacao.ToString());
     }
@@ -178,9 +151,11 @@ LocacaoBase FinalizarLocacao()
     Console.ReadKey();
     return locacaoFinalizar;
 }
+
 //Cadastrar Veiculo
 void CadastrarVeiculo()
 {
+    Console.Clear();
     Console.WriteLine("╔════════════════════════════════════════════╗");
     Console.WriteLine("║             Categoria Veículo              ║");
     Console.WriteLine("╠════════════════════════════════════════════╣");
@@ -208,6 +183,7 @@ void CadastrarVeiculo()
             locadora.CadastrarVeiculo(caminhao);
             break;
     }
+    Console.ReadKey();
 }
 VeiculoBase CadastrarCarro()
 {
@@ -327,10 +303,10 @@ VeiculoBase CadastrarCaminhao()
     return caminhao;
 }
 
-
 //Cadastrar Clientes
 void CadastrarCliente()
 {
+    Console.Clear();
     Console.WriteLine("╔════════════════════════════════════════════╗");
     Console.WriteLine("║             Tipo de Cliente                ║");
     Console.WriteLine("╠════════════════════════════════════════════╣");
@@ -471,6 +447,32 @@ PessoaBase CadastrarPessoaJuridica()
 }
 
 //Buscar Cliente
+void MenuBuscarTodosClientes()
+{
+    Console.Clear();
+    var clientes = locadora.BuscarClientes();
+    Console.WriteLine("CLIENTES ENCONTRADOS: ");
+    foreach (var cliente in clientes)
+    {
+        Console.WriteLine(cliente);
+    }
+    Console.ReadKey();
+}
+void MenuBuscarClientePorDocumento()
+{
+    Console.Clear();
+    var clienteEncontrado = BuscarCliente();
+    if (clienteEncontrado == null)
+    {
+        Console.WriteLine("Nenhum Cliente encontrado com esse documento");
+        Console.ReadKey();
+        return;
+    }
+    Console.WriteLine("CLIENTE ENCONTRADO: ");
+    Console.WriteLine();
+    Console.WriteLine(clienteEncontrado.ToString());
+    Console.ReadKey();
+}
 PessoaBase BuscarCliente()
 {
     Console.Clear();
@@ -492,7 +494,6 @@ PessoaBase BuscarCliente()
 
     return null;
 }
-
 PessoaBase BuscarPessoaFisica()
 {
     Console.Write("Digite seu CPF: ");
@@ -500,7 +501,6 @@ PessoaBase BuscarPessoaFisica()
 
     return locadora.BuscarCliente(cpf, 0);
 }
-
 PessoaBase BuscarPessoaJuridica()
 {
     Console.Write("Digite seu CNPJ: ");
@@ -510,6 +510,28 @@ PessoaBase BuscarPessoaJuridica()
 }
 
 //Buscar Veiculos
+void MenuBuscarVeiculo()
+{
+    Console.Clear();
+    var veiculoEncontrado = BuscarVeiculos();
+    if (veiculoEncontrado == null)
+    {
+        Console.WriteLine("Nenhum Veículo encontrado");
+    }
+    if (veiculoEncontrado.Count == 1)
+    {
+        Console.WriteLine($"{veiculoEncontrado.Count} - VEÍCULO ENCONTRADO: ");
+    }
+    else
+    {
+        Console.WriteLine($"{veiculoEncontrado.Count} - VEÍCULOS ENCONTRADOS: ");
+    }
+    foreach (var veiculo in veiculoEncontrado)
+    {
+        Console.WriteLine(veiculo);
+    }
+    Console.ReadKey();
+}
 List<VeiculoBase> BuscarVeiculos()
 {
     Console.WriteLine("╔════════════════════════════════════════════╗");
@@ -548,8 +570,10 @@ List<VeiculoBase> BuscarCarros()
     {
         case 1:
             return BuscarPorCatetoria("CAR");
-        case 2:
-            return BuscarPorCombustivel("CAR");
+        default:
+            Console.Write("Opção inválida, digite uma opção válida: ");
+            opcao = int.Parse(Console.ReadLine());
+            break;
     }
 
     return null;
@@ -564,8 +588,10 @@ List<VeiculoBase> BuscarMotos()
     {
         case 1:
             return BuscarPorCatetoria("MOTO");
-        case 2:
-            return BuscarPorCombustivel("MOTO");
+        default:
+            Console.Write("Opção inválida, digite uma opção válida: ");
+            opcao = int.Parse(Console.ReadLine());
+            break;
     }
 
     return null;
@@ -581,13 +607,14 @@ List<VeiculoBase> BuscarCaminhoes()
     {
         case 1:
             return BuscarPorCatetoria("CAM");
-        case 2:
-            return BuscarPorCombustivel("CAM");
+        default:
+            Console.Write("Opção inválida, digite uma opção válida: ");
+            opcao = int.Parse(Console.ReadLine());
+            break;
     }
 
     return null;
 }
-
 List<VeiculoBase> BuscarPorCatetoria(string veiculo)
 {
     switch (veiculo)
@@ -606,20 +633,6 @@ List<VeiculoBase> BuscarPorCatetoria(string veiculo)
     return veiculoEncontrado;
 
 }
-List<VeiculoBase> BuscarPorCombustivel(string veiculo)
-{
-    switch (veiculo)
-    {
-        case "CAR": CombustivelCarro(); break;
-        case "MOTO": CombustivelMoto(); break;
-        case "CAM": CombustivelCaminhao(); break;
-    }
-    Console.Write("Digite o tipo de combustível do carro: ");
-    string opcaoCombustivel = Console.ReadLine().ToUpper();
-
-    return locadora.BuscarVeiculosCombustivel(opcaoCombustivel);
-}
-
 
 //Exibição de Menus
 
@@ -754,10 +767,9 @@ void BuscarVeiculo(string veiculo)
 {
     Console.Clear();
     Console.WriteLine(" ╔════════════════════════════════════════════╗");
-    Console.WriteLine($"║               Buscar {veiculo}             ║");
+    Console.WriteLine($"               Buscar {veiculo}             ");
     Console.WriteLine(" ╠════════════════════════════════════════════╣");
     Console.WriteLine(" ║ 1. Categoria                               ║");
-    Console.WriteLine(" ║ 2. Combustivel                             ║");
     Console.WriteLine(" ╚════════════════════════════════════════════╝");
     Console.WriteLine();
 }
