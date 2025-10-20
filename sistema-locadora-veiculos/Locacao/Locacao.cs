@@ -53,12 +53,16 @@ namespace sistema_locadora_veiculos.Locacao
         {
             var sb = new StringBuilder();
 
-            sb.AppendLine("─────────────────────────────────────────");
+            sb.AppendLine("────────────────────────────────────────────────────────────");
             sb.AppendLine($"ID da Locação:  {this.Id}");
-            sb.AppendLine($"Cliente:        {this.Pessoa.ToString()}");
-            sb.AppendLine($"Veículo:        {this.Veiculo.ToString()}");
+            sb.AppendLine("────────────────────────────────────────────────────────────");
+            sb.AppendLine($"Cliente");
+            sb.AppendLine($"{this.Pessoa.ToString()}");
+            sb.AppendLine("────────────────────────────────────────────────────────────");
+            sb.AppendLine($"Veículo");
+            sb.AppendLine($"{this.Veiculo.ToString()}");
             sb.AppendLine($"Data:           {this.DataInicioLocacao}");
-            sb.AppendLine($"{(this.Valor != 0 ? ($"Valor a pagar: {this.Valor}") : "")}");
+            sb.AppendLine($"{(this.Valor != 0 ? ($"Valor a pagar: {this.Valor}") : "0")}");
             return sb.ToString();
         }
     }

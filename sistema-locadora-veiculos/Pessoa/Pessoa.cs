@@ -31,7 +31,6 @@ namespace sistema_locadora_veiculos.Pessoa.Pessoa
         {
             var sb = new StringBuilder();
 
-            sb.AppendLine("──────────────────────────────");
             sb.AppendLine($"ID:          {Id}");
             sb.AppendLine($"Nome:        {Nome}");
             sb.AppendLine($"Telefone:    {Telefone}");

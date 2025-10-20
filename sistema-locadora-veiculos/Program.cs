@@ -2,6 +2,7 @@
 using sistema_locadora_veiculos.Locacoes;
 using sistema_locadora_veiculos.Pessoa.Pessoa;
 using sistema_locadora_veiculos.Veiculo;
+using System.Data;
 using System.Runtime.CompilerServices;
 
 Locadora locadora = new Locadora();
@@ -90,6 +91,8 @@ void RealizarLocacao()
     {
         Console.WriteLine("Nenhum Veículo encontrado");
         Console.ReadKey();
+        Console.Clear();
+        veiculos = BuscarVeiculos();
     }
     if (veiculos.Count == 1)
     {
@@ -753,7 +756,7 @@ void ExibirMenuInicial()
     Console.WriteLine("║ 1. Alugar veículo                          ║");
     Console.WriteLine("║ 2. Devolver veículo                        ║");
     Console.WriteLine("║ 3. Cadastrar veiculo                       ║");
-    Console.WriteLine("║ 4. Listar veículos disponíveis             ║");
+    Console.WriteLine("║ 4. Listar veículos                         ║");
     Console.WriteLine("║ 5. Cadastrar Cliente                       ║");
     Console.WriteLine("║ 6. Buscar Cliente                          ║");
     Console.WriteLine("║ 7. Listar Clientes                         ║");

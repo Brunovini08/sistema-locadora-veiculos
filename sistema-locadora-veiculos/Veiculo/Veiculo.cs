@@ -34,7 +34,6 @@ namespace sistema_locadora_veiculos.Veiculo
         {
             var sb = new StringBuilder();
 
-            sb.AppendLine("──────────────────────────────");
             sb.AppendLine($"ID:                   {Id}");
             sb.AppendLine($"Marca:                {Marca}");
             sb.AppendLine($"Modelo:               {Modelo}");
