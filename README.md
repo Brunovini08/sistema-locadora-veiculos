@@ -49,7 +49,7 @@ O sistema oferece as seguintes opções no menu principal:
 
 1. Clone este repositório:
    ```bash
-   git clone https://github.com/Brunovini08/locadora-veiculos.git
+   https://github.com/Brunovini08/sistema-locadora-veiculos.git
    ```
 2. Entrar na pasta
   ```bash
